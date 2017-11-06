@@ -1,14 +1,18 @@
 how to deploy
 
+0. config
+
+ROOT_DIR=/data
+
 1. create directories for retrieved contents. You can pick your preferred names/hierarchy for these directories since
 they are configurable in storage.properties and elsevier-harvester.properties (see section 2)
 
-mkdir -p /data/dit/data/elsevier/sitemaps-storage/
-mkdir -p /data/dit/data/elsevier/metadata/
-mkdir -p /data/dit/data/elsevier/pdf
-mkdir -p /data/dit/data/elsevier/crawler-storage
+mkdir -p $ROOT_DIR/dit/data/elsevier/sitemaps-storage/
+mkdir -p $ROOT_DIR/dit/data/elsevier/metadata/
+mkdir -p $ROOT_DIR/dit/data/elsevier/pdf
+mkdir -p $ROOT_DIR/dit/data/elsevier/crawler-storage
 
-sudo chmod -R 777 /data/dit/data/elsevier/
+sudo chmod -R 777 $ROOT_DIR/dit/data/elsevier/
 
 1.2
 Install RabbitMQ from https://www.rabbitmq.com/
@@ -30,13 +34,13 @@ elsevier-harvester.properties (ElsevierHarvester module)
 
 4. copy jars to the server
 
-scp ElsevierProcessor/target/ElsevierProcessor-1.0-SNAPSHOT-shaded.jar  fs:/data/dit/bin/
-scp ElsevierHarvester/target/ElsevierHarvester-1.0-SNAPSHOT-shaded.jar   fs:/data/dit/bin/
+scp ElsevierProcessor/target/ElsevierProcessor-1.0-SNAPSHOT-shaded.jar  fs:$ROOT_DIR/dit/bin/
+scp ElsevierHarvester/target/ElsevierHarvester-1.0-SNAPSHOT-shaded.jar   fs:$ROOT_DIR/dit/bin/
 
 5.
 rename exisiting tables in db
 
 6. 
 start processes:
-java -jar /data/dit/bin/ElsevierHarvester-1.0-SNAPSHOT-shaded.jar >> /data/dit/bin/elsevier_harvester.log
-java -jar /data/dit/bin/ElsevierProcessor-1.0-SNAPSHOT-shaded.jar > /data/dit/bin/elsevier_processor.log
+java -jar $ROOT_DIR/dit/bin/ElsevierHarvester-1.0-SNAPSHOT-shaded.jar >> $ROOT_DIR/dit/bin/elsevier_harvester.log
+java -jar $ROOT_DIR/dit/bin/ElsevierProcessor-1.0-SNAPSHOT-shaded.jar > $ROOT_DIR/dit/bin/elsevier_processor.log
