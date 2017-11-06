@@ -32,6 +32,8 @@ elsevier-harvester.properties (ElsevierHarvester module)
 
 3. clean and build 
 
+mvn build && mvn install
+
 4. copy jars to the server
 
 scp ElsevierProcessor/target/ElsevierProcessor-1.0-SNAPSHOT-shaded.jar  fs:$ROOT_DIR/dit/bin/
